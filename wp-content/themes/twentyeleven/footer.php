@@ -19,16 +19,22 @@ if ( isset($_POST["email-name"]) and isset($_POST["email-phone"]) and isset($_PO
 		$name = $_POST['email-name'];
 		$phone = $_POST['email-phone'];
 		$company = $_POST['email-company'];
+		echo "1"
           require 'vendor/autoload.php';
+          echo "2"
           $sendgrid = new SendGrid(getenv('SENDGRID_USERNAME'), getenv('SENDGRID_PASSWORD'));
+          echo "3"
           $message = new SendGrid\Email();
+          echo "4"
           $message->addTo(getenv('SENDGRID_EMAIL'))->
             addTo("akalinin.cr@gmail.com")->
             setFrom(getenv('SENDGRID_EMAIL'))->
             setSubject('d8ii')->
             setText($_POST["email-name"])->
             setHtml("<strong>{$_POST['email-phone']}. {$_POST['email-company']}</strong>");
+            echo "5"
             $response = $sendgrid->send($message);
+          echo "6"
           echo "Message sent success ".$response;
 		// echo "{$_POST['email-company']}.{$_POST['email-phone']}.{$_POST['email-name']}";
 		// echo "".$_POST['email-company'];
